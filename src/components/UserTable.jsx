@@ -1,0 +1,65 @@
+import React from 'react';
+
+const UserTable = ({ users, onEdit, onDelete }) => {
+    if (!users || users.length === 0) {
+        return (
+            <div className="text-center py-20 glass rounded-2xl">
+                <p className="text-slate-400 text-lg">No users found. Start by adding one!</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="overflow-hidden glass rounded-2xl animate-in fade-in slide-in-from-right-4 duration-700">
+            <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="bg-slate-100/50">
+                            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Name</th>
+                            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Email</th>
+                            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Age</th>
+                            <th className="px-6 py-4 text-sm font-semibold text-slate-600 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                        {users.map((user) => (
+                            <tr key={user._id} className="hover:bg-slate-50/50 transition-colors group">
+                                <td className="px-6 py-4">
+                                    <span className="font-medium text-slate-800">{user.name}</span>
+                                </td>
+                                <td className="px-6 py-4 text-slate-600">{user.email}</td>
+                                <td className="px-6 py-4">
+                                    <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-500">
+                                        {user.age} years
+                                    </span>
+                                </td>
+                                <td className="px-6 py-4 text-right space-x-2">
+                                    <button
+                                        onClick={() => onEdit(user)}
+                                        className="p-2 text-primary hover:bg-primary/10 rounded-lg"
+                                        title="Edit User"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        onClick={() => onDelete(user._id)}
+                                        className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg"
+                                        title="Delete User"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default UserTable;
